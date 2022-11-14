@@ -16,7 +16,7 @@ private:
   // Database folder's path
   std::string db_folder_name;
   // Checking if the database folder exists
-  static bool dirExists(const char *path);
+  static bool is_directory_exists(const char *path);
 public:
   // Class constructor
   explicit Core(std::string db_folder_name) {
@@ -24,7 +24,7 @@ public:
 	if (!this->db_folder_name.ends_with("/")) {
 	  this->db_folder_name = this->db_folder_name + "/";
 	}
-	if (!dirExists(this->db_folder_name.c_str())) {
+	if (!is_directory_exists(this->db_folder_name.c_str())) {
 	  std::filesystem::create_directory(this->db_folder_name);
 	}
   }
