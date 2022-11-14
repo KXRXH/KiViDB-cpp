@@ -12,9 +12,9 @@ bool KiViDbCore::Core::dirExists(const char *path) {
 	return true;
   }
   return false;
-
 }
-void KiViDbCore::Core::createCluster(const std::string &cluster_name) {
+
+void KiViDbCore::Core::create_cluster(const std::string &cluster_name) {
   std::string cluster_path = db_folder_name;
   if (!cluster_name.ends_with("/")) {
 	cluster_path = db_folder_name + "/";

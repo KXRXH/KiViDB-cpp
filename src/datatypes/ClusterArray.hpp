@@ -22,11 +22,17 @@ public:
   // Append a new cluster to the cluster array
   void append(Cluster cluster) {
 	cluster_array_size++;
+	// Create a new cluster array
 	auto *new_cluster_array_data = new Cluster[cluster_array_size];
-	for (unsigned int i = 0; i < cluster_array_size - 1; i++) {
+	for (int i = 0; i < cluster_array_size - 1; i++) {
 	  new_cluster_array_data[i] = cluster_array_data[i];
 	}
+	// Append the new cluster
 	new_cluster_array_data[cluster_array_size - 1] = cluster;
+	// Deleting old cluster array data
+	delete[] cluster_array_data;
+	// Assigning new cluster array data
+	cluster_array_data = new_cluster_array_data;
   }
   // Class destructor
   ~ClusterArray() {

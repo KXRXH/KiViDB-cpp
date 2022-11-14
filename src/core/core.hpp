@@ -17,17 +17,19 @@ private:
   std::string db_folder_name;
   // Checking if the database folder exists
   static bool dirExists(const char *path);
-  void createCluster(const std::string &cluster_name);
 public:
   // Class constructor
-  explicit Core(std::string db_folder_name) : db_folder_name(std::move(db_folder_name)) {
+  explicit Core(std::string db_folder_name) {
+	this->db_folder_name = std::move(db_folder_name);
+	if (!this->db_folder_name.ends_with("/")) {
+	  this->db_folder_name = this->db_folder_name + "/";
+	}
 	if (!dirExists(this->db_folder_name.c_str())) {
 	  std::filesystem::create_directory(this->db_folder_name);
 	}
   }
-  void newCluster(const std::string &cluster_name) {
-	createCluster(cluster_name);
-  }
+  // Create a new cluster
+  void create_cluster(const std::string &cluster_name);
   // Class destructor
   ~Core() {
 	db_folder_name.clear();
