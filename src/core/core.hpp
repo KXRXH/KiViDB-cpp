@@ -5,9 +5,11 @@
 #ifndef KIVIDBCPP_SRC_CORE_CORE_HPP
 #define KIVIDBCPP_SRC_CORE_CORE_HPP
 
+#include <sys/stat.h>
 #include <string>
 #include <filesystem>
 #include "../datatypes/ClusterArray.hpp"
+
 namespace KiViDbCore {
 class Core {
 private:
