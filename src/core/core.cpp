@@ -1,7 +1,6 @@
 //
 // Created by kxrxh on 11/15/22.
 //
-#include <sys/stat.h>
 #include "core.hpp"
 
 bool KiViDbCore::Core::is_directory_exists(const char *path) {
