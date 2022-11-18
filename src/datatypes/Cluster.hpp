@@ -7,17 +7,16 @@
 
 #include <iostream>
 #include <cassert>
+#include <vector>
 #include "Document.hpp"
 struct Cluster {
   std::string name;
   std::string path;
-  Document *document_array = new Document[0];
+  std::vector<Document> document_array;
   unsigned int document_array_size = 0;
   Cluster(std::string name, std::string path) : name(std::move(name)), path(std::move(path)) {};
-  Cluster(std::string name, std::string path, Document *_document_array, unsigned int size)
-	  : name(std::move(name)), path(std::move(path)), document_array_size(size) {
-	document_array = _document_array;
-  };
+  Cluster(std::string name, std::string path, std::vector<Document> document_array)
+      : name(std::move(name)), path(std::move(path)), document_array(std::move(document_array)) {}
   Cluster() = default;
   // Add document to the document array
   void add_document(const Document &document);
@@ -25,8 +24,9 @@ struct Cluster {
   void remove_document(unsigned int index);
   // Return stdout stream
   friend std::ostream &operator<<(std::ostream &os, const Cluster &cluster) {
-	os << "Cluster_name: " << cluster.name << " ";
-	os << "Cluster_path: " << cluster.path << std::endl;
+    os << "Cluster_name: " << cluster.name << " ";
+    os << "Cluster_path: " << cluster.path << std::endl;
+    return os;
   }
 };
 

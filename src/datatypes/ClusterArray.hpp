@@ -8,81 +8,54 @@
 class ClusterArray {
 private:
   bool _debug = false;
-  unsigned int cluster_array_size;
-  Cluster *cluster_array_data;
+  std::vector<Cluster> cluster_array;
 public:
   // Class constructor
-  ClusterArray() {
-	cluster_array_size = 0;
-	cluster_array_data = nullptr;
-  }
+  explicit ClusterArray() = default;
   explicit ClusterArray(bool debug_) : ClusterArray() {
-	_debug = debug_;
-	if (_debug) {
-	  std::cout << "[DEBUG] ClusterArray constructor called" << std::endl;
-	}
+    _debug = debug_;
+    if (_debug) {
+      std::cout << "[DEBUG] ClusterArray constructor called" << std::endl;
+    }
   }
   // Append a new cluster to the cluster array
-  void append(Cluster cluster) {
-	// Create a new cluster array
-	auto *new_cluster_array_data = new Cluster[++cluster_array_size];
-	for (int i = 0; i < cluster_array_size - 1; i++) {
-	  new_cluster_array_data[i] = std::move(cluster_array_data[i]);
-	}
-	// Append the new cluster
-	new_cluster_array_data[cluster_array_size - 1] = std::move(cluster);
-	// Deleting old cluster array data
-	delete[] cluster_array_data;
-	// Assigning new cluster array data
-	cluster_array_data = new_cluster_array_data;
+  void append(const Cluster &cluster) {
+    // Create a new cluster array
+    cluster_array.push_back(cluster);
   }
   // Remove element from cluster array by its index
   void remove(unsigned int index) {
-	assert(index < cluster_array_size);
-	// Create a new cluster array
-	auto *new_cluster_array_data = new Cluster[cluster_array_size - 1];
-	for (int i = 0; i < index; i++) {
-	  new_cluster_array_data[i] = std::move(cluster_array_data[i]);
-	}
-	for (int i = index + 1; i < cluster_array_size; i++) {
-	  new_cluster_array_data[i - 1] = std::move(cluster_array_data[i]);
-	}
-	// Deleting old cluster array data
-	delete[] cluster_array_data;
-	// Assigning new cluster array data
-	cluster_array_data = new_cluster_array_data;
-	cluster_array_size--;
+    // Check if the index is out of range
+    assert(index < cluster_array.size());
+    // Remove element from the cluster array`
+    cluster_array.erase(cluster_array.begin() + index);
   }
   // Get ClusterArray size
   [[nodiscard]] unsigned int size() const {
-	return cluster_array_size;
+    return cluster_array.size();
   }
   // Clear ClusterArray
   void clear() {
-	cluster_array_size = 0;
-	delete[] cluster_array_data;
+    cluster_array.clear();
   }
   // Return ClusterArray copy
   [[nodiscard]] ClusterArray copy() const {
-	ClusterArray copy_of_cluster_array(true);
-	for (int i = 0; i < cluster_array_size; i++) {
-	  copy_of_cluster_array.append(Cluster(cluster_array_data[i].name, cluster_array_data[i].path,
-										   cluster_array_data[i].document_array,
-										   cluster_array_data[i].document_array_size));
-	}
-	return copy_of_cluster_array;
+    ClusterArray copy_of_cluster_array;
+    for (const auto &cluster : cluster_array) {
+      copy_of_cluster_array.append(cluster);
+    }
+    return copy_of_cluster_array;
   }
   // Class destructor
   ~ClusterArray() {
-	if (_debug) {
-	  std::cout << "[DEBUG] ClusterArray destructor called" << std::endl;
-	}
-	// delete[] cluster_array_data;
-	cluster_array_size = 0;
+    if (_debug) {
+      std::cout << "[DEBUG] ClusterArray destructor called" << std::endl;
+    }
+    cluster_array.clear();
   }
   // Overloading the [] operator
-  [[nodiscard]] Cluster &operator[](unsigned int index) const {
-	return cluster_array_data[index];
+  [[nodiscard]] Cluster operator[](unsigned int index) const {
+    return cluster_array[index];
   }
 };
 #endif //KIVIDBCPP_SRC_DATATYPES_CLUSTERARRAY_HPP
