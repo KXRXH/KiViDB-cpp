@@ -1,0 +1,8 @@
+//
+// Created by kxrxh on 11/18/22.
+//
+
+#ifndef KIVIDB_CPP_SRC_API_HANDLERS_HPP
+#define KIVIDB_CPP_SRC_API_HANDLERS_HPP
+
+#endif //KIVIDB_CPP_SRC_API_HANDLERS_HPP

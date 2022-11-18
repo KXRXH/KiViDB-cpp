@@ -10,6 +10,7 @@
 #include <filesystem>
 #include <iostream>
 #include "../datatypes/ClusterArray.hpp"
+#include "../datatypes/Document.hpp"
 
 namespace KiViDbCore {
 class Core {
@@ -43,7 +44,7 @@ public:
 	  std::cout << "[DEBUG] Core constructor called" << std::endl;
 	}
   }
-  // DATABASE OPERATIONS:
+  // CLUSTER OPERATIONS:
   // 1. Get all clusters in the database
   [[nodiscard]] ClusterArray get_all_clusters() const;
   // 2. Create a new cluster
@@ -52,6 +53,13 @@ public:
   [[nodiscard]] Cluster get_cluster(const std::string &cluster_name) const;
   // 4. Delete cluster by name
   void delete_cluster(const std::string &cluster_name);
+  // DOCUMENT OPERATIONS:
+  // 1. Create a new document
+  void create_document(const std::string &cluster_name,
+					   const std::string &document_name,
+					   const std::string &document_content);
+  // 2. Get document by name
+  [[nodiscard]] Document get_document(const std::string &cluster_name, const std::string &document_name) const;
   // Class destructor
   ~Core() {
 	if (debug) {
