@@ -24,6 +24,7 @@ void KiViDbCore::Core::create_cluster(const std::string &cluster_name) {
 	cluster_array.append(Cluster{cluster_name, cluster_path});
   }
 }
+
 // Get cluster by name
 Cluster KiViDbCore::Core::get_cluster(const std::string &cluster_name) const {
   for (int i = 0; i < cluster_array.size(); i++) {
