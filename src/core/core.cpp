@@ -48,16 +48,16 @@ void KiViDbCore::Core::update_cluster_array() {
 	for (const auto &_ : std::filesystem::directory_iterator(cluster_path)) {
 	  number_of_files++;
 	}
-	auto* _doc_array = new Document[number_of_files];
+	std::vector<Document> _doc_vector(number_of_files);
 	for (int i = 0; const auto &document : std::filesystem::directory_iterator(cluster_path)) {
 	  // Read document content
 	  std::ifstream document_content_file(document.path());
 	  std::string document_content;
 	  document_content_file >> document_content;
 	  // Create document object
-	  _doc_array[i++] = Document{document.path().filename(), document_content};
+	  _doc_vector[i++] = Document{document.path().filename(), document_content};
 	}
-	cluster_array.append(Cluster{cluster_name, cluster_path, _doc_array, number_of_files});
+	cluster_array.append(Cluster{cluster_name, cluster_path, _doc_vector});
   }
 }
 
@@ -85,7 +85,10 @@ Document KiViDbCore::Core::get_document(const std::string &cluster_name, const s
 	return Document{"", ""};
   }
 }
-void KiViDbCore::Core::create_document(const std::string &cluster_name, const std::string &document_name, const std::string &document_content) {
+
+void KiViDbCore::Core::create_document(const std::string &cluster_name,
+									   const std::string &document_name,
+									   const std::string &document_content) {
   std::string document_path = db_folder_name + cluster_name + "/" + document_name;
   if (!is_directory_exists(document_path.c_str())) {
 	std::filesystem::create_directory(document_path);

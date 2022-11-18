@@ -13,7 +13,6 @@ struct Cluster {
   std::string name;
   std::string path;
   std::vector<Document> document_array;
-  unsigned int document_array_size = 0;
   Cluster(std::string name, std::string path) : name(std::move(name)), path(std::move(path)) {};
   Cluster(std::string name, std::string path, std::vector<Document> document_array)
       : name(std::move(name)), path(std::move(path)), document_array(std::move(document_array)) {}

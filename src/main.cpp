@@ -7,13 +7,30 @@ int main() {
   CROW_ROUTE(app, "/")([]() {
 	return "Hello from KiViDB";
   });
-  CROW_ROUTE(app, "/cluster/get/<string>")([core](std::string _cluster_id) {
+  CROW_ROUTE(app, "/cluster/get/filter/<string>")([core](const std::string &_cluster_id) {
+	Cluster cluster = core.get_cluster(_cluster_id);
+	std::vector<std::string> document_array;
+	for (auto &i : cluster.document_array) {
+	  document_array.push_back(i.name);
+	}
 	crow::json::wvalue x;
-	auto cluster = core.get_cluster(_cluster_id);
-	char *json_str;
-	sprintf(json_str, R"({ "cluster_id": "%s", "document_array_size": %d)", cluster.name.c_str(), cluster.document_array_size);
-	x["clusters"] = crow::json::load(json_str);
-	return x;
+	x["cluster_name"] = cluster.name;
+	x["cluster_documents"] = document_array;
+	crow::json::wvalue result = x;
+	return crow::response(std::move(result));
+  });
+  // TODO
+  CROW_ROUTE(app, "/cluster/get/all")([core]() {
+	auto cluster_array = core.get_all_clusters();
+	std::vector<std::string> document_array;
+	for (auto &i : cluster.document_array) {
+	  document_array.push_back(i.name);
+	}
+	crow::json::wvalue x;
+	x["cluster_name"] = cluster.name;
+	x["cluster_documents"] = document_array;
+	crow::json::wvalue result = x;
+	return crow::response(std::move(result));
   });
   app.bindaddr("127.0.0.1").port(18080).run();
 }
