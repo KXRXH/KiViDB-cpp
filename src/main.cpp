@@ -1,4 +1,4 @@
-#include "crow.h"
+#include "crow_all.h"
 #include "core/core.hpp"
 
 int main() {
