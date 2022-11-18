@@ -14,13 +14,46 @@ bool KiViDbCore::Core::is_directory_exists(const char *path) {
 }
 
 void KiViDbCore::Core::create_cluster(const std::string &cluster_name) {
-  std::string cluster_path = db_folder_name;
-  if (!cluster_name.ends_with("/")) {
-	cluster_path = db_folder_name + "/";
+  std::string cluster_path = db_folder_name + cluster_name;
+  if (!cluster_path.ends_with("/")) {
+	cluster_path += "/";
   }
-  cluster_path += cluster_name;
   if (!is_directory_exists(cluster_path.c_str())) {
 	std::filesystem::create_directory(cluster_path);
-	cluster_array.append(Cluster{cluster_name.c_str(), cluster_path.c_str()});
+	cluster_array.append(Cluster{cluster_name, cluster_path});
+  }
+}
+// Get cluster by name
+Cluster KiViDbCore::Core::get_cluster(const std::string &cluster_name) const {
+  for (int i = 0; i < cluster_array.size(); i++) {
+	if (cluster_array[i].name == cluster_name) {
+	  return cluster_array[i];
+	}
+  }
+  return Cluster{"", ""};
+}
+
+void KiViDbCore::Core::update_cluster_array() {
+  cluster_array.clear();
+  for (const auto &entry : std::filesystem::directory_iterator(db_folder_name)) {
+	std::string cluster_name = entry.path().filename();
+	std::string cluster_path = entry.path();
+	if (!cluster_path.ends_with("/")) {
+	  cluster_path += "/";
+	}
+	cluster_array.append(Cluster{cluster_name, cluster_path});
+  }
+}
+
+ClusterArray KiViDbCore::Core::get_all_clusters() const {
+  return cluster_array.copy();
+}
+void KiViDbCore::Core::delete_cluster(const std::string &cluster_name) {
+  for (int i = 0; i < cluster_array.size(); i++) {
+	if (cluster_array[i].name == cluster_name) {
+	  std::filesystem::remove_all(cluster_array[i].path);
+	  cluster_array.remove(i);
+	  return;
+	}
   }
 }

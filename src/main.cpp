@@ -1,12 +1,7 @@
-#include <iostream>
-#include "core/core.hpp"
-
+#include "../test/tests.hpp"
 int main() {
-  KiViDbCore::Core core("../database/kividb/");
-  for (int i = 10; i < 100; i++) {
-	std::stringstream ss;
-	ss << "cluster" << i;
-	core.create_cluster(ss.str());
-  }
+  test1();
+  test2();
+  test3();
   return 0;
 }

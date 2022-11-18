@@ -8,17 +8,21 @@
 #include <sys/stat.h>
 #include <string>
 #include <filesystem>
+#include <iostream>
 #include "../datatypes/ClusterArray.hpp"
 
 namespace KiViDbCore {
 class Core {
 private:
+  bool debug = false;
   // Cluster array
-  ClusterArray cluster_array;
+  ClusterArray cluster_array = ClusterArray(true);
   // Database folder's path
   std::string db_folder_name;
   // Checking if the database folder exists
   static bool is_directory_exists(const char *path);
+  // Updating cluster array
+  void update_cluster_array();
 public:
   // Class constructor
   explicit Core(std::string db_folder_name) {
@@ -28,15 +32,34 @@ public:
 	}
 	if (!is_directory_exists(this->db_folder_name.c_str())) {
 	  std::filesystem::create_directory(this->db_folder_name);
+	  return;
+	}
+	update_cluster_array();
+  }
+  // Debug mode setter (default: false)
+  Core(std::string db_folder_name, bool debug_) : Core(std::move(db_folder_name)) {
+	debug = debug_;
+	if (debug) {
+	  std::cout << "[DEBUG] Core constructor called" << std::endl;
 	}
   }
-  // Create a new cluster
+  // DATABASE OPERATIONS:
+  // 1. Get all clusters in the database
+  [[nodiscard]] ClusterArray get_all_clusters() const;
+  // 2. Create a new cluster
   void create_cluster(const std::string &cluster_name);
+  // 3. Get cluster by name
+  [[nodiscard]] Cluster get_cluster(const std::string &cluster_name) const;
+  // 4. Delete cluster by name
+  void delete_cluster(const std::string &cluster_name);
   // Class destructor
   ~Core() {
+	if (debug) {
+	  std::cout << "[DEBUG] Core destructor called" << std::endl;
+	}
 	db_folder_name.clear();
   }
 };
 
-} // KiviDbCore
+} // KiViDbCore
 #endif //KIVIDBCPP_SRC_CORE_CORE_HPP
