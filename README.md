@@ -23,9 +23,14 @@ $ cd build
 $ cmake ..
 $ cmake --build .
 ```
+<div style="text-align: center;"><h3>or</h3></div>
+
+```bash
+$ ./build.sh
+```
 
 ### Run
 
 ```bash
-./kividb
+$ ./kividb
 ```
