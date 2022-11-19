@@ -14,8 +14,8 @@ void Api::init_cluster_routes() {
   // Cluster routes
   // Create a new cluster
   CROW_ROUTE(app, "/cluster/create/<string>").methods("POST"_method)([&](const crow::request &req,
-												  crow::response &res,
-												  const std::string &_cluster_id) {
+																		 crow::response &res,
+																		 const std::string &_cluster_id) {
 	crow::json::wvalue json;
 	// Check if the cluster already exists
 	if (core.cluster_exists(_cluster_id)) {
@@ -33,20 +33,20 @@ void Api::init_cluster_routes() {
   });
   // Delete a cluster
   CROW_ROUTE(app, "/cluster/delete/<string>").methods("DELETE"_method)([&](const crow::request &req,
-												  crow::response &res,
-												  const std::string &_cluster_id) {
+																		   crow::response &res,
+																		   const std::string &_cluster_id) {
 	crow::json::wvalue json;
 	// Check if the cluster already exists
-	if (!core.cluster_exists(_cluster_id)) {
-	  res.code = 400;
-	  json["message"] = "Cluster doesn't exists";
+	if (core.cluster_exists(_cluster_id)) {
+	  core.delete_cluster(_cluster_id);
+	  res.code = 200;
+	  json["message"] = "Cluster successfully deleted";
 	  res.body = json.dump();
 	  res.end();
 	  return;
 	}
-	core.delete_cluster(_cluster_id);
-	res.code = 200;
-	json["message"] = "Cluster successfully deleted";
+	res.code = 400;
+	json["message"] = "Cluster doesn't exists";
 	res.body = json.dump();
 	res.end();
   });
