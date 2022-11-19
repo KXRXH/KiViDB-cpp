@@ -96,3 +96,6 @@ void KiViDbCore::Core::create_document(const std::string &cluster_name,
   this->get_cluster(cluster_name).add_document(Document{document_name, document_content});
 
 }
+bool KiViDbCore::Core::cluster_exists(const std::string &cluster_name) const {
+  return is_directory_exists((db_folder_name + cluster_name).c_str());
+}

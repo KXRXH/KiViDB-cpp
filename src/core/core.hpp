@@ -25,6 +25,7 @@ private:
   // Updating Cluster array
   void update_cluster_array();
 public:
+  [[nodiscard]] bool cluster_exists(const std::string &cluster_name) const;
   // Class constructor
   explicit Core(std::string db_folder_name) {
 	this->db_folder_name = std::move(db_folder_name);

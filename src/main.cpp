@@ -13,7 +13,7 @@ int main() {
   if (std::regex_match(kividb_port, std::regex("[0-9]+"))) {
 	int_port = std::stoi(kividb_port);
   };
-  Api api((KiViDbCore::Core((!kividb_path.empty() ? kividb_path : "./kividb"))));
+  Api api((KiViDbCore::Core((!kividb_path.empty() ? kividb_path : "../database/kividb"))));
   // api.init_document_routes();
   api.init_cluster_routes();
   api.listen_to(int_port);

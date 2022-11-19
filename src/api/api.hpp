@@ -12,7 +12,7 @@ private:
   crow::App<crow::CORSHandler> app;
   KiViDbCore::Core core;
 public:
-  explicit Api(const KiViDbCore::Core& Core) : core(Core) {};
+  explicit Api(const KiViDbCore::Core &Core) : core(Core) {};
   void init_cluster_routes();
   void init_document_routes();
   void listen_to(int _port);
