@@ -23,7 +23,7 @@ $ cd build
 $ cmake ..
 $ cmake --build .
 ```
-
+or
 ```bash
 $ ./build.sh
 ```
