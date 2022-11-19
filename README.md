@@ -1,6 +1,6 @@
 # KiViDB C++
 
-Simple non-SQL database, but written with C++
+Simple non-SQL database. Was written with [Golang](https://github.com/BigCubeCat/KiViDB), but now with C++
 
 ## Usage
 
