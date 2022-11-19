@@ -10,7 +10,7 @@ void test1() {
   KiViDbCore::Core core("../database/kividb/", true);
   for (int i = 10; i < 15; i++) {
 	std::stringstream ss;
-	ss << "cluster" << i;
+	ss << "Cluster" << i;
 	core.create_cluster(ss.str());
   }
   std::string n = "cluster10";

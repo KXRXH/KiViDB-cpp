@@ -7,40 +7,33 @@
 #include "cassert"
 class ClusterArray {
 private:
-  bool _debug = false;
   std::vector<Cluster> cluster_array;
 public:
   // Class constructor
   explicit ClusterArray() = default;
-  explicit ClusterArray(bool debug_) : ClusterArray() {
-    _debug = debug_;
-    if (_debug) {
-      std::cout << "[DEBUG] ClusterArray constructor called" << std::endl;
-    }
-  }
-  // Append a new cluster to the cluster array
+  // Append a new Cluster to the Cluster array
   void append(const Cluster &cluster) {
-    // Create a new cluster array
+    // Create a new Cluster array
     cluster_array.push_back(cluster);
   }
-  // Remove element from cluster array by its index
+  // Remove element from Cluster array by its index
   void remove(unsigned int index) {
     // Check if the index is out of range
     assert(index < cluster_array.size());
-    // Remove element from the cluster array`
+    // Remove element from the Cluster array`
     cluster_array.erase(cluster_array.begin() + index);
   }
-  // Get ClusterArray size
+  // Get cluster_array size
   [[nodiscard]] unsigned int size() const {
     return cluster_array.size();
   }
-  // Clear ClusterArray
+  // Clear cluster_array
   void clear() {
     cluster_array.clear();
   }
-  // Return ClusterArray copy
+  // Return cluster_array copy
   [[nodiscard]] ClusterArray copy() const {
-    ClusterArray copy_of_cluster_array;
+	ClusterArray copy_of_cluster_array;
     for (const auto &cluster : cluster_array) {
       copy_of_cluster_array.append(cluster);
     }
@@ -48,9 +41,6 @@ public:
   }
   // Class destructor
   ~ClusterArray() {
-    if (_debug) {
-      std::cout << "[DEBUG] ClusterArray destructor called" << std::endl;
-    }
     cluster_array.clear();
   }
   // Overloading the [] operator

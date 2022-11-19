@@ -17,9 +17,9 @@ struct Cluster {
   Cluster(std::string name, std::string path, std::vector<Document> document_array)
       : name(std::move(name)), path(std::move(path)), document_array(std::move(document_array)) {}
   Cluster() = default;
-  // Add document to the document array
+  // Add Document to the Document array
   void add_document(const Document &document);
-  // Remove document from the document array
+  // Remove Document from the Document array
   void remove_document(unsigned int index);
   // Return stdout stream
   friend std::ostream &operator<<(std::ostream &os, const Cluster &cluster) {

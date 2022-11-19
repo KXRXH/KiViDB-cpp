@@ -25,7 +25,7 @@ void KiViDbCore::Core::create_cluster(const std::string &cluster_name) {
   }
 }
 
-// Get cluster by name
+// Get Cluster by name
 Cluster KiViDbCore::Core::get_cluster(const std::string &cluster_name) const {
   for (int i = 0; i < cluster_array.size(); i++) {
 	if (cluster_array[i].name == cluster_name) {
@@ -43,18 +43,18 @@ void KiViDbCore::Core::update_cluster_array() {
 	if (!cluster_path.ends_with("/")) {
 	  cluster_path += "/";
 	}
-	// Get number of files in the cluster directory
+	// Get number of files in the Cluster directory
 	unsigned int number_of_files = 0;
 	for (const auto &_ : std::filesystem::directory_iterator(cluster_path)) {
 	  number_of_files++;
 	}
 	std::vector<Document> _doc_vector(number_of_files);
 	for (int i = 0; const auto &document : std::filesystem::directory_iterator(cluster_path)) {
-	  // Read document content
+	  // Read Document content
 	  std::ifstream document_content_file(document.path());
 	  std::string document_content;
 	  document_content_file >> document_content;
-	  // Create document object
+	  // Create Document object
 	  _doc_vector[i++] = Document{document.path().filename(), document_content};
 	}
 	cluster_array.append(Cluster{cluster_name, cluster_path, _doc_vector});
@@ -82,8 +82,8 @@ Document KiViDbCore::Core::get_document(const std::string &cluster_name, const s
 	if (entry.path().filename() == document_name) {
 	  return Document{document_name, document_path};
 	}
-	return Document{"", ""};
   }
+  return Document{"", ""};
 }
 
 void KiViDbCore::Core::create_document(const std::string &cluster_name,
