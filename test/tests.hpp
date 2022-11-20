@@ -10,7 +10,7 @@ void test1() {
   KiViDbCore::Core core("../database/kividb/", true);
   for (int i = 10; i < 15; i++) {
 	std::stringstream ss;
-	ss << "cluster" << i;
+	ss << "Cluster" << i;
 	core.create_cluster(ss.str());
   }
   std::string n = "cluster10";
@@ -58,6 +58,6 @@ void test4() {
   auto ac = core.get_all_clusters();
   for (int i = 0; i < ac.size(); i++) {
 	std::cout << ac[i] << ac[i].document_array_size;
-	std::cout << "DATA: " << ac[i].document_array[0].data << "\n";
+	std::cout << "DATA: " << ac[i].document_array[0].content << "\n";
   }
 }

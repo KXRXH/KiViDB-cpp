@@ -8,15 +8,15 @@
 
 struct Document {
   std::string name;
-  std::string data;
+  std::string content;
   Document() = default;
   Document(std::string name_, std::string data_) {
 	name = std::move(name_);
-	data = std::move(data_);
+	content = std::move(data_);
   }
   friend std::ostream &operator<<(std::ostream &os, const Document &document) {
 	os << "Document name: " << document.name << "\n";
-	os << "Document data: " << document.data << "\n";
+	os << "Document content: " << document.content << "\n";
 	return os;
   }
 };

@@ -9,23 +9,26 @@
 #include <cassert>
 #include <vector>
 #include "Document.hpp"
+
 struct Cluster {
   std::string name;
   std::string path;
   std::vector<Document> document_array;
   Cluster(std::string name, std::string path) : name(std::move(name)), path(std::move(path)) {};
   Cluster(std::string name, std::string path, std::vector<Document> document_array)
-      : name(std::move(name)), path(std::move(path)), document_array(std::move(document_array)) {}
+	  : name(std::move(name)), path(std::move(path)), document_array(std::move(document_array)) {}
   Cluster() = default;
-  // Add document to the document array
+  // Add Document to the Document array
   void add_document(const Document &document);
-  // Remove document from the document array
+  // Remove Document from the Document array by its index
   void remove_document(unsigned int index);
+  // Remove Document from the Document array by its name
+  void remove_document(const std::string &document_name);
   // Return stdout stream
   friend std::ostream &operator<<(std::ostream &os, const Cluster &cluster) {
-    os << "Cluster_name: " << cluster.name << " ";
-    os << "Cluster_path: " << cluster.path << std::endl;
-    return os;
+	os << "Cluster_name: " << cluster.name << " ";
+	os << "Cluster_path: " << cluster.path << std::endl;
+	return os;
   }
 };
 

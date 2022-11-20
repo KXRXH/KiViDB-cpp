@@ -1,3 +1,5 @@
 /cmake-build-debug/
 /database/
 /.idea/
+/include/
+/build/
