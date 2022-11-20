@@ -58,6 +58,6 @@ void test4() {
   auto ac = core.get_all_clusters();
   for (int i = 0; i < ac.size(); i++) {
 	std::cout << ac[i] << ac[i].document_array_size;
-	std::cout << "DATA: " << ac[i].document_array[0].data << "\n";
+	std::cout << "DATA: " << ac[i].document_array[0].content << "\n";
   }
 }

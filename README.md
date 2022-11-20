@@ -15,7 +15,7 @@ $ export KIVIDB_PORT=8080
 
 ```bash
 $ mkdir include
-$ cd include
+$ cd include 
 $ curl -LO https://github.com/CrowCpp/Crow/releases/download/v1.0%2B5/crow_all.h
 $ cd ..
 $ mkdir build
