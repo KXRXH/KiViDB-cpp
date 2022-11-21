@@ -7,7 +7,7 @@ Simple non-SQL database. Was written with [Golang](https://github.com/BigCubeCat
 ### Create an environment variables
 
 ```bash
-$ export KIVIDB_HOME=/any/folder/you/like
+$ export KIVIDB_PATH=/any/folder/you/like
 $ export KIVIDB_PORT=8080
 ```
 
