@@ -14,10 +14,10 @@ void Cluster::remove_document(unsigned int index) {
 // Remove document by index
 void Cluster::remove_document(const std::string &document_name) {
   for (unsigned int i = 0; i < document_array.size(); i++) {
-	if (document_array[i].name == document_name) {
-	  document_array.erase(document_array.begin() + i);
-	  return;
-	}
+    if (document_array[i].name == document_name) {
+      document_array.erase(document_array.begin() + i);
+      return;
+    }
   }
 }
 

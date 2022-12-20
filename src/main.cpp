@@ -11,7 +11,7 @@ int main() {
   int int_port = 8085; // Default port
   // Checking if the port is valid
   if (std::regex_match(kividb_port, std::regex("[0-9]+"))) {
-	int_port = std::stoi(kividb_port);
+    int_port = std::stoi(kividb_port);
   };
   // Creating API object
   Api api((KiViDbCore::Core((!kividb_path.empty() ? kividb_path : "./kividb"))));
