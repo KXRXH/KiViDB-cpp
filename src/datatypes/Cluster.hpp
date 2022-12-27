@@ -25,9 +25,6 @@ struct Cluster {
   // Add Document to the Document array
   void add_document(const Document &document);
 
-  // Remove Document from the Document array by its index
-  void remove_document(unsigned int index);
-
   // Remove Document from the Document array by its name
   void remove_document(const std::string &document_name);
 

@@ -11,50 +11,28 @@ class ClusterArray {
 private:
   std::vector<Cluster> cluster_array;
 public:
-  // Class constructor
   explicit ClusterArray() = default;
 
   // Append a new Cluster to the Cluster array
-  void append(const Cluster &cluster) {
-    // Create a new Cluster array
-    cluster_array.push_back(cluster);
-  }
+  void append(const Cluster &cluster);
 
   // Remove element from Cluster array by its index
-  void remove(unsigned int index) {
-    // Check if the index is out of range
-    assert(index < cluster_array.size());
-    // Remove element from the Cluster array`
-    cluster_array.erase(cluster_array.begin() + index);
-  }
+  void remove(unsigned int index);
 
   // Get cluster_array size
-  [[nodiscard]] unsigned int size() const {
-    return cluster_array.size();
-  }
+  [[nodiscard]] unsigned int size() const;
 
   // Clear cluster_array
-  void clear() {
-    cluster_array.clear();
-  }
+  void clear();
 
   // Return cluster_array copy
-  [[nodiscard]] ClusterArray copy() const {
-    ClusterArray copy_of_cluster_array;
-    for (const auto &cluster : cluster_array) {
-      copy_of_cluster_array.append(cluster);
-    }
-    return copy_of_cluster_array;
-  }
-
-  // Class destructor
-  ~ClusterArray() {
-    cluster_array.clear();
-  }
+  [[nodiscard]] ClusterArray copy() const;
 
   // Overloading the [] operator
-  [[nodiscard]] Cluster operator[](unsigned int index) const {
-    return cluster_array[index];
+  [[nodiscard]] Cluster operator[](unsigned int index) const;
+
+  ~ClusterArray() {
+    cluster_array.clear();
   }
 };
 
